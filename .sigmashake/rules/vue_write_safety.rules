@@ -1,0 +1,20 @@
+# vue_write_safety.rules
+# Technology: vue | Capability: write
+
+rule vue-block-unsafe-patterns {
+  enabled true
+  priority 90
+  severity error
+  DENY write
+  IF path GLOB "**/*" AND content CONTAINS "UNSAFE_vue_PATTERN"
+  MESSAGE "Blocked an unsafe pattern in vue. Use the recommended best practices for 2025/2026."
+}
+
+rule vue-force-updated-api {
+  enabled true
+  priority 80
+  severity warning
+  ASK write
+  IF path GLOB "**/*" AND content CONTAINS "OLD_vue_API"
+  MESSAGE "You are using an outdated API for vue. Please upgrade to the newer API."
+}
